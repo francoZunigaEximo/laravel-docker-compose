@@ -37,6 +37,8 @@ services:
       - REDIS_PORT=6379
     volumes:
       - 'C:/Users/fzuniga/DOCKER-LARAVEL/cmit:/app'
+    command: 
+      composer install --ignore-platform-reqs
     depends_on:
       - mariadb
       - redis  
