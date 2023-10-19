@@ -5,19 +5,17 @@ descarge el codigo de cmit o realice un git clone es esta carpeta.
 ```bash
 git clone <codigo-cmit-repo> cmit
 ```
-## 2 Instale las dependencias
-```bash
-cd cmit
-php artisan cache:clear
-dale composer install
-```
+
 ## 3 modifique el docker compose
-tiene que agregra la ruta completa a la carpeta cmit en la seccion de `volumenes:` en la seccion de my-app
+tiene que agregra la ruta completa a la carpeta cmit en la seccion de `volumenes:` en la seccion de my-app y composer-aux indicando la ruta ej: `'C:/Users/pepe/DOCKER-LARAVEL/cmit:/app'`.
 
 ## 5 ejecute el docker compose
 ejecute `docker compose up -d` para levantar los servicios
 
-## 6 configue el sistema
+## 6 composer install
+el contenedor de composer va a realizar la instalacion de las dependencias del proyecto, el contenedor de myapp se iniciara luego de que se levante el contenedor de composer, mariadb y redis pero la instalacion lleva tiempo en realizarse. por lo que tendra que reiniciar el contenedor de myapp luego de que se finalize la instalacion.
+
+## 7 configue el sistema
 copie el script config.sh a la carpeta cmit (carpeta con la aplicacion)
 luego identifique la aplicacion en docker usando `docker ps` vera algo como esto
 ```bash
@@ -28,3 +26,5 @@ bd918170c7b3   redis                  "docker-entrypoint.s…"   3 minutes ago  
 ```
 
 ejecute `docker exec -it docker-larave-myapp-1 bash` esto le abrira una terminal interactiva donde podra ejecutar el siguiente comando `./config.sh` esto iniciara la configuracion del proyecto.
+
+sino desde docker desktop en `container>docker-laravel>my-app` en la seccion de terminal podra ejecute `bash` y luego .`/config.sh`.
